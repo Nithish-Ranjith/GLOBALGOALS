@@ -1,4 +1,4 @@
-import React, { useState, FormEvent, useEffect } from 'react';
+import React, { useState, useEffect, type FormEvent } from 'react';
 import { supabase } from '../lib/supabaseClient';
 import { X, Upload, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 import imageCompression from 'browser-image-compression';
@@ -91,7 +91,7 @@ export default function RegistrationModal({ isOpen, onClose }: RegistrationModal
       const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
       const filePath = `receipts/${fileName}`;
 
-      const { data: uploadData, error: uploadError } = await supabase.storage
+      const { error: uploadError } = await supabase.storage
         .from('payment-screenshots')
         .upload(filePath, compressedFile);
 
